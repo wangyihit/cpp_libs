@@ -17,8 +17,8 @@ unzip_source(){
     tar -zxvf "$file"
 }
 
-# download
-# unzip_source
+download
+unzip_source
 
 
 # make -j && make install

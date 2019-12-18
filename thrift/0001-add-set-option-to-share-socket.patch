@@ -1,0 +1,27 @@
+From 24be0ca8f4f456fae165cf54a93a42551656ad47 Mon Sep 17 00:00:00 2001
+From: Yi Wang <wangyihit@hotmail.com>
+Date: Wed, 18 Dec 2019 16:09:18 +0800
+Subject: [PATCH] add set option to share socket
+
+---
+ lib/cpp/src/thrift/transport/TServerSocket.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/lib/cpp/src/thrift/transport/TServerSocket.cpp b/lib/cpp/src/thrift/transport/TServerSocket.cpp
+index 87b6383..15a3276 100644
+--- a/lib/cpp/src/thrift/transport/TServerSocket.cpp
++++ b/lib/cpp/src/thrift/transport/TServerSocket.cpp
+@@ -422,6 +422,10 @@ void TServerSocket::listen() {
+     }
+   }
+ 
++  // set opt to share socket
++  int so_reuseaddr = 1;
++  setsockopt(serverSocket_, SOL_SOCKET, SO_REUSEPORT, &so_reuseaddr, sizeof(so_reuseaddr));
++  
+   // Set NONBLOCK on the accept socket
+   int flags = THRIFT_FCNTL(serverSocket_, THRIFT_F_GETFL, 0);
+   if (flags == -1) {
+-- 
+2.7.4
+

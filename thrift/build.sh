@@ -6,7 +6,8 @@ file="$name.tar.gz"
 build_path="$root/build/$name"
 output_path="$root/output/$name"
 source="$root/thrift/thrift*"
-
+boost="$root/output/boost"
+libevent="$root/output/libevent"
 
 download(){
     echo "Download..."
@@ -16,26 +17,47 @@ unzip_source(){
     echo "Unzip"
     tar -zxvf "$file"
 }
-
+cd $(dirname $0)
 download
 unzip_source
-
+# patch to shared port
+patch lib/cpp/src/thrift/transport/TServerSocket.cpp < ./0001-add-set-option-to-share-socket.patch
 cd $source
 mkdir -p $output_path
 ./bootstrap.sh &&
     ./configure                \
         --enable-shared=no     \
-        --with-nodejs=no       \
         --with-python=no       \
-        --with-go=no           \
         --prefix=$output_path  \
         --with-qt4=no          \
-        --with-qt5=no          \
-        --with-php=no          \
-        --with-boost=/home/wangyi/proj/cpp/libs \
-        --with-libevent=/home/wangyi/proj/cpp/libs \
-        CXXFLAGS='-g -O2' \
-        CFLAGS='-g -O2' \
+        --with-boost=$boost    \
+        --with-libevent=$libevent \
+        CXXFLAGS='-g -O2'      \
+        CFLAGS='-g -O2'        \
+        --with-as3=no \
+        --with-qt5=no \
+        --with-openssl=DIR=no \
+        --with-csharp=no \
+        --with-java=no \
+        --with-erlang=no \
+        --with-nodejs=no \
+        --with-nodets=no \
+        --with-lua=no \
+        --with-python=no \
+        --with-py3=no \
+        --with-perl=no \
+        --with-php=no \
+        --with-php_extension=no \
+        --with-dart=no \
+        --with-ruby=no \
+        --with-haskell=no \
+        --with-go=no \
+        --with-swift=no \
+        --with-rs=no \
+        --with-cl=no \
+        --with-haxe=no \
+        --with-dotnetcore=no \
+        --with-d=no \
     &&  \
     make -j \
     && \

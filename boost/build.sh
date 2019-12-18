@@ -16,6 +16,7 @@ unzip_source(){
     tar -zxvf "$file"
 }
 cd $(dirname $0)  
-download
+#download
 unzip_source
-mv $source $output_path/boost
+mv $source boost
+mv boost $output_path/

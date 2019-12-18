@@ -22,7 +22,7 @@ unzip_source(){
     echo "Unzip contrib"
     tar -zxvf "$contrib_file"
 }
-
+cd $(dirname $0)
 download
 unzip_source
 

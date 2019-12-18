@@ -16,7 +16,7 @@ unzip_source(){
     echo "Unzip"
     tar -zxvf "$file"
 }
-
+cd $(dirname $0)
 download
 unzip_source
 

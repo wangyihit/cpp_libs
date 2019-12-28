@@ -13,5 +13,6 @@ protected:
     long end_ms;
     long duration_ms;
 };
+long currentMS();
 }
 #endif // TIMER_H

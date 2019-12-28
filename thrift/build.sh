@@ -20,15 +20,17 @@ unzip_source(){
 cd $(dirname $0)
 download
 unzip_source
-# patch to shared port
-patch lib/cpp/src/thrift/transport/TServerSocket.cpp < ./0001-add-set-option-to-share-socket.patch
 cd $source
+# patch to shared port
+patch lib/cpp/src/thrift/transport/TServerSocket.cpp < ../0001-add-set-option-to-share-socket.patch
+
 mkdir -p $output_path
 ./bootstrap.sh &&
     ./configure                \
         --enable-shared=no     \
         --with-python=no       \
         --prefix=$output_path  \
+        --enable-tests=no      \
         --with-qt4=no          \
         --with-boost=$boost    \
         --with-libevent=$libevent \

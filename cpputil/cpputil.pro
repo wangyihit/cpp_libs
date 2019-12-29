@@ -28,7 +28,8 @@ SOURCES += cpputil.cpp \
 
 HEADERS += cpputil.h \
     thrift_tool.h \
-    timer.h
+    timer.h \
+    algorithm.h
 
 unix {
     target.path = $$PWD/../output/cpputil/lib

@@ -18,7 +18,7 @@ public:
         using namespace apache::thrift::transport;
         using namespace apache::thrift::protocol;
         TMemoryBuffer* buffer = new TMemoryBuffer;
-        boost::shared_ptr<TTransport> trans(buffer);
+        std::shared_ptr<TTransport> trans(buffer);
         TBinaryProtocol protocol(trans);
         ts.write(&protocol);
         uint8_t* buf;
@@ -34,7 +34,7 @@ public:
         using namespace apache::thrift::protocol;
         TMemoryBuffer* buffer = new TMemoryBuffer;
         buffer->write((const uint8_t*)buff.data(), buff.size());
-        boost::shared_ptr<TTransport> trans(buffer);
+        std::shared_ptr<TTransport> trans(buffer);
         TBinaryProtocol protocol(trans);
         ts->read(&protocol);
         return true;

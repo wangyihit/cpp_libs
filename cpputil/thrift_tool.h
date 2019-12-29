@@ -8,7 +8,7 @@
 #include <thrift/transport/TTransport.h>
 #include <thrift/transport/TBufferTransports.h>
 #include <thrift/protocol/TBinaryProtocol.h>
-
+#include <thrift/protocol/TJSONProtocol.h>
 
 namespace CppUtil {
 class ThrfitTool {

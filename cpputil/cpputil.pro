@@ -22,6 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 include($$PWD/../thrift/thrift.pri)
+include($$PWD/../spdlog/spdlog.pri)
 
 SOURCES += cpputil.cpp \
     timer.cpp
@@ -29,7 +30,8 @@ SOURCES += cpputil.cpp \
 HEADERS += cpputil.h \
     thrift_tool.h \
     timer.h \
-    algorithm.h
+    algorithm.h \
+    logger.h
 
 unix {
     target.path = $$PWD/../output/cpputil/lib

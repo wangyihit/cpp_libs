@@ -1,6 +1,8 @@
 #ifndef CPPUTIL_H
 #define CPPUTIL_H
 #include <string>
+#include "algorithm.h"
+#include "logger.h"
 #include "thrift_tool.h"
 #include "timer.h"
 

@@ -2,6 +2,7 @@
 #define ALGORITHM_H
 namespace CppUtil {
 class Algorithm {
+public:
     static inline int hamdist(long long x, long long y){
         int dist = 0;
         long long val = x ^ y;

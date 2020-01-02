@@ -25,13 +25,15 @@ include($$PWD/../thrift/thrift.pri)
 include($$PWD/../spdlog/spdlog.pri)
 
 SOURCES += cpputil.cpp \
-    timer.cpp
+    timer.cpp \
+    filehelper.cpp
 
 HEADERS += cpputil.h \
     thrift_tool.h \
     timer.h \
     algorithm.h \
-    logger.h
+    logger.h \
+    filehelper.h
 
 unix {
     target.path = $$PWD/../output/cpputil/lib

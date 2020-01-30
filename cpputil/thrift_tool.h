@@ -32,12 +32,17 @@ public:
                                ThriftStruct* ts) {
         using namespace apache::thrift::transport;
         using namespace apache::thrift::protocol;
+        bool ok = true;
         TMemoryBuffer* buffer = new TMemoryBuffer;
-        buffer->write((const uint8_t*)buff.data(), buff.size());
-        std::shared_ptr<TTransport> trans(buffer);
-        TBinaryProtocol protocol(trans);
-        ts->read(&protocol);
-        return true;
+        try {
+            buffer->write((const uint8_t*)buff.data(), buff.size());
+            std::shared_ptr<TTransport> trans(buffer);
+            TBinaryProtocol protocol(trans);
+            ts->read(&protocol);
+        }catch(...){
+            ok = false;
+        }
+        return ok;
     }
     template<typename ThriftStruct>
     static std::string thriftToJson(const ThriftStruct& ts) {
@@ -59,11 +64,16 @@ public:
         using namespace apache::thrift::transport;
         using namespace apache::thrift::protocol;
         TMemoryBuffer* buffer = new TMemoryBuffer;
-        buffer->write((const uint8_t*)buff.data(), buff.size());
-        std::shared_ptr<TTransport> trans(buffer);
-        TJSONProtocol protocol(trans);
-        ts->read(&protocol);
-        return true;
+        bool ok = true;
+        try {
+            buffer->write((const uint8_t*)buff.data(), buff.size());
+            std::shared_ptr<TTransport> trans(buffer);
+            TJSONProtocol protocol(trans);
+            ts->read(&protocol);
+        }catch(...){
+            ok = false;
+        }
+        return ok;
     }
 };
 } // end of namespace cpputil

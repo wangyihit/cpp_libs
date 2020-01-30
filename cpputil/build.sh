@@ -10,7 +10,7 @@ mkdir -p $build_path
 cd $build_path
 
 run_qmake(){
-    // for debug: CONFIG+=debug CONFIG+=qml_debug
+    # for debug: CONFIG+=debug CONFIG+=qml_debug
     qmake $source/cpputil.pro -spec linux-g++
 }
 

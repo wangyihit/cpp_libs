@@ -26,14 +26,17 @@ include($$PWD/../spdlog/spdlog.pri)
 
 SOURCES += cpputil.cpp \
     timer.cpp \
-    filehelper.cpp
+    filehelper.cpp \
+    jsontool.cpp
 
 HEADERS += cpputil.h \
     thrift_tool.h \
     timer.h \
     algorithm.h \
     logger.h \
-    filehelper.h
+    filehelper.h \
+    nlohmann/json.hpp \
+    jsontool.h
 
 unix {
     target.path = $$PWD/../output/cpputil/lib

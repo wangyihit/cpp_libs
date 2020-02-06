@@ -14,7 +14,7 @@
 namespace CppUtil {
 inline void initLogger(std::string logger_name="root", std::string log_file="output.log", bool console_log = true)
 {
-     spdlog::set_pattern("%H:%M:%S, %n, $L, %@, %v");
+     spdlog::set_pattern("%Y-%m-%d %H:%M:%S, %l, %@, %v");
      if(console_log == false) {
          std::shared_ptr<spdlog::logger> file_logger = spdlog::daily_logger_mt(logger_name, log_file);
          spdlog::set_default_logger(file_logger);

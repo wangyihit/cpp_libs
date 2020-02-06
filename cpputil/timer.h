@@ -13,6 +13,6 @@ protected:
     long end_ms;
     long duration_ms;
 };
-long currentMS();
+extern long currentMS();
 } // end of namespace cpputil
 #endif // TIMER_H

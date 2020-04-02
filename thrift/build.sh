@@ -22,7 +22,9 @@ download
 unzip_source
 cd $source
 # patch to shared port
-patch lib/cpp/src/thrift/transport/TServerSocket.cpp < ../0001-add-set-option-to-share-socket.patch
+patch lib/cpp/src/thrift/transport/TServerSocket.cpp < ../patch/0001-add-set-option-to-share-socket.patch
+patch lib/cpp/src/thrift/server/TServerFramework.h <  ../patch/0002-add-simple-server-flag-to-stop.patch
+patch lib/cpp/src/thrift/server/TServerFramework.cpp <  ../patch/0002-add-simple-server-flag-to-stop.patch
 
 mkdir -p $output_path
 ./bootstrap.sh &&

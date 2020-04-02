@@ -1,0 +1,77 @@
+From 69594af1097a99f9a3fd6618df8eb1ab8730bec0 Mon Sep 17 00:00:00 2001
+From: wangyi <wangyihit@hotmail.com>
+Date: Thu, 2 Apr 2020 16:05:55 +0800
+Subject: [PATCH] add simple server flag to stop
+
+---
+ lib/cpp/src/thrift/server/TServerFramework.cpp | 11 +++++++----
+ lib/cpp/src/thrift/server/TServerFramework.h   |  3 ++-
+ 2 files changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/lib/cpp/src/thrift/server/TServerFramework.cpp b/lib/cpp/src/thrift/server/TServerFramework.cpp
+index 302cbf16..1fa6c5fc 100644
+--- a/lib/cpp/src/thrift/server/TServerFramework.cpp
++++ b/lib/cpp/src/thrift/server/TServerFramework.cpp
+@@ -44,7 +44,7 @@ TServerFramework::TServerFramework(const shared_ptr<TProcessorFactory>& processo
+   : TServer(processorFactory, serverTransport, transportFactory, protocolFactory),
+     clients_(0),
+     hwm_(0),
+-    limit_(INT64_MAX) {
++    limit_(INT64_MAX), keep_running(true) {
+ }
+ 
+ TServerFramework::TServerFramework(const shared_ptr<TProcessor>& processor,
+@@ -54,7 +54,7 @@ TServerFramework::TServerFramework(const shared_ptr<TProcessor>& processor,
+   : TServer(processor, serverTransport, transportFactory, protocolFactory),
+     clients_(0),
+     hwm_(0),
+-    limit_(INT64_MAX) {
++    limit_(INT64_MAX), keep_running(true) {
+ }
+ 
+ TServerFramework::TServerFramework(const shared_ptr<TProcessorFactory>& processorFactory,
+@@ -71,7 +71,7 @@ TServerFramework::TServerFramework(const shared_ptr<TProcessorFactory>& processo
+             outputProtocolFactory),
+     clients_(0),
+     hwm_(0),
+-    limit_(INT64_MAX) {
++    limit_(INT64_MAX), keep_running(true) {
+ }
+ 
+ TServerFramework::TServerFramework(const shared_ptr<TProcessor>& processor,
+@@ -88,7 +88,7 @@ TServerFramework::TServerFramework(const shared_ptr<TProcessor>& processor,
+             outputProtocolFactory),
+     clients_(0),
+     hwm_(0),
+-    limit_(INT64_MAX) {
++    limit_(INT64_MAX), keep_running(true) {
+ }
+ 
+ TServerFramework::~TServerFramework() = default;
+@@ -123,6 +123,9 @@ void TServerFramework::serve() {
+ 
+   // Fetch client from server
+   for (;;) {
++    if(keep_running == false){
++         break;
++    }
+     try {
+       // Dereference any resources from any previous client creation
+       // such that a blocking accept does not hold them indefinitely.
+diff --git a/lib/cpp/src/thrift/server/TServerFramework.h b/lib/cpp/src/thrift/server/TServerFramework.h
+index dac79ef5..4fdd1b14 100644
+--- a/lib/cpp/src/thrift/server/TServerFramework.h
++++ b/lib/cpp/src/thrift/server/TServerFramework.h
+@@ -142,7 +142,8 @@ protected:
+    * \param[in]  pClient  the disconnected client
+    */
+   virtual void onClientDisconnected(TConnectedClient* pClient) = 0;
+-
++public:
++  bool keep_running;
+ private:
+   /**
+    * Common handling for new connected clients.  Implements concurrent
+-- 
+2.17.1
+

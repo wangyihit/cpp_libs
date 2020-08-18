@@ -23,8 +23,8 @@ unzip_source(){
     tar -zxvf "$contrib_file"
 }
 cd $(dirname $0)
-download
-unzip_source
+#download
+#unzip_source
 
 # install dep
 # sudo apt-get install libavresample-dev libavcodec-dev libavformat-dev libswscale-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev libgtk2.0-dev
@@ -41,6 +41,7 @@ cmake \
     -WITH_FFMPEG=ON \
     -DOPENCV_EXTRA_MODULES_PATH=$contrib_source/modules \
     -DBUILD_TESTS=OFF \
+    -DOPENCV_ENABLE_NONFREE=ON \
     $cv_source
 }
 

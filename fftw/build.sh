@@ -23,5 +23,5 @@ unzip_source
 cd $source
 OUT="$output_path"
 mkdir -p $OUT
-LDFLAGS="-L$OUT/lib" CPPFLAGS="-I$OUT/include" ./configure --prefix=$OUT $*
+LDFLAGS="-L$OUT/lib" CPPFLAGS="-I$OUT/include" ./configure --prefix=$OUT --enable-shared --enable-sse --enable-float $*
 make -j && make install

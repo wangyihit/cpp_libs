@@ -22,6 +22,6 @@ cd $source
 ./bootstrap.sh --prefix=$output_path
 ./b2
 cd -
--mv $source boost
--mv boost $output_path/
+mv $source boost
+mv boost $output_path/
 
